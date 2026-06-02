@@ -1,21 +1,31 @@
 {
   "name": "@najumi/storage",
   "version": "1.0.0",
-  "description": "Official Najumi Storage SDK for Node.js",
+  "description": "Official JavaScript SDK for Najumi Storage",
   "main": "src/index.js",
   "types": "index.d.ts",
   "keywords": [
     "najumi",
+    "najumi-storage",
     "storage",
     "cloud",
+    "cloud-storage",
+    "file-storage",
     "upload",
-    "files",
-    "sdk"
+    "download",
+    "bucket",
+    "sdk",
+    "nodejs"
   ],
-  "author": "Najumi Tech",
+  "author": "Najumi Tech <info@najumitech.com>",
   "license": "MIT",
+  "homepage": "https://github.com/najumitech/storage-sdk",
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/najumitech/storage-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/najumitech/storage-sdk/issues"
   },
   "engines": {
     "node": ">=18"

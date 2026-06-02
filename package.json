@@ -1,0 +1,33 @@
+{
+  "name": "@najumi/storage",
+  "version": "1.0.0",
+  "description": "Official Najumi Storage SDK for Node.js",
+  "main": "src/index.js",
+  "types": "index.d.ts",
+  "keywords": [
+    "najumi",
+    "storage",
+    "cloud",
+    "upload",
+    "files",
+    "sdk"
+  ],
+  "author": "Najumi Tech",
+  "license": "MIT",
+  "repository": {
+    "type": "git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "src",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "axios": "^1.16.1",
+    "form-data": "^4.0.5"
+  }
+}

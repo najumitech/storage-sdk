@@ -1,0 +1,17 @@
+# Changelog
+
+## 1.0.0
+
+Initial release of the official Najumi Storage SDK.
+
+### Features
+
+- Bucket authentication
+- File upload
+- File listing
+- File download
+- File deletion
+- Bucket statistics
+- TypeScript support
+- Node.js support
+- Comprehensive documentation

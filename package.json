@@ -1,6 +1,6 @@
 {
   "name": "@najumi/storage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Official JavaScript SDK for Najumi Storage",
   "main": "src/index.js",
   "types": "index.d.ts",
@@ -10,12 +10,18 @@
     "storage",
     "cloud",
     "cloud-storage",
+    "object-storage",
     "file-storage",
     "upload",
     "download",
     "bucket",
     "sdk",
-    "nodejs"
+    "nodejs",
+    "javascript",
+    "typescript",
+    "backend",
+    "api",
+    "cdn"
   ],
   "author": "Najumi Tech <info@najumitech.com>",
   "license": "MIT",

@@ -1,46 +1,56 @@
-const upload =
-  require('./upload');
-
-const files =
-  require('./files');
-
-const stats =
-  require('./stats');
-
-const download =
-  require('./download');
-
-const remove =
-  require('./delete');
+const upload = require("./upload");
+const files = require("./files");
+const stats = require("./stats");
+const download = require("./download");
+const remove = require("./delete");
 
 class NajumiStorage {
-  constructor(
-    config = {},
-  ) {
+  constructor(config = {}) {
     this.baseUrl =
       config.baseUrl ||
-      'https://storage-api.najumitech.com';
+      "https://storage-api.najumitech.com";
 
-    this.bucketId =
-      config.bucketId;
+    this.bucketId = config.bucketId;
+    this.accessKey = config.accessKey;
+    this.secretKey = config.secretKey;
 
-    this.accessKey =
-      config.accessKey;
+    this.timeout =
+      config.timeout || 60000;
 
-    this.secretKey =
-      config.secretKey;
+    this.version = "1.1.0";
+
+    if (!this.bucketId) {
+      throw new Error(
+        "Missing bucketId."
+      );
+    }
+
+    if (!this.accessKey) {
+      throw new Error(
+        "Missing accessKey."
+      );
+    }
+
+    if (!this.secretKey) {
+      throw new Error(
+        "Missing secretKey."
+      );
+    }
   }
 
   headers() {
     return {
-      'x-bucket-id':
+      "x-bucket-id":
         this.bucketId,
 
-      'x-access-key':
+      "x-access-key":
         this.accessKey,
 
-      'x-secret-key':
+      "x-secret-key":
         this.secretKey,
+
+      "User-Agent":
+        `@najumi/storage/${this.version}`,
     };
   }
 }

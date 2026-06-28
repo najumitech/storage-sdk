@@ -25,6 +25,32 @@ This SDK is the official Node.js client for Najumi Storage and provides a conven
 Whether you are building a startup, enterprise application, SaaS platform, content delivery system, backup solution, or automation workflow, Najumi Storage provides the storage foundation needed to manage files reliably and efficiently.
 
 
+## What's New in v1.1.0
+
+Najumi Storage SDK v1.1.0 introduces significant improvements while remaining fully backward compatible with v1.0.0.
+
+### New Features
+
+- Upload files using local file paths.
+- Upload files directly from Node.js Buffers.
+- Upload Readable Streams.
+- Upload Multer file objects.
+- Custom upload options.
+- Custom filename support.
+- Custom Content-Type support.
+- Configurable upload timeout.
+- Improved upload validation.
+- Better error messages.
+- Improved TypeScript definitions.
+- Improved developer experience.
+
+### Backward Compatibility
+
+Applications built with v1.0.0 continue to work without any code changes.
+
+Existing APIs remain unchanged, while new capabilities have been added for greater flexibility and easier integration into modern Node.js applications.
+
+
 ## Features
 
 Najumi Storage provides a modern cloud storage experience for developers and businesses.
@@ -44,6 +70,20 @@ Core Features
 
 SDK Features
 
+### New in v1.1.0
+
+- Upload from local file paths.
+- Upload directly from Node.js Buffers.
+- Upload directly from Readable Streams.
+- Upload Multer file objects.
+- Automatic upload source detection.
+- Custom upload filename support.
+- Custom upload path support.
+- Custom Content-Type support.
+- Configurable request timeout.
+- Improved upload validation.
+- Better developer error messages.
+- Fully backward compatible with v1.0.0.
 - Official JavaScript SDK.
 - Node.js support.
 - TypeScript support.
@@ -75,6 +115,11 @@ Developer Experience
 - Production-ready architecture.
 - Quick onboarding for new developers.
 
+- Automatic upload source detection.
+- Improved TypeScript definitions.
+- Cleaner upload API.
+- Better IDE auto-completion.
+- More flexible upload workflows.
 
 ## Installation
 Installation
@@ -533,6 +578,103 @@ After initializing the client, learn how authentication works and how credential
 
 The next section covers authentication and request security.
 
+## Quick Start
+
+Create a new Najumi Storage client.
+
+```js
+const NajumiStorage = require("@najumi/storage");
+
+const storage = new NajumiStorage({
+  bucketId: process.env.NAJUMI_BUCKET_ID,
+  accessKey: process.env.NAJUMI_ACCESS_KEY,
+  secretKey: process.env.NAJUMI_SECRET_KEY,
+  baseUrl: process.env.NAJUMI_STORAGE_BASE_URL
+});
+```
+
+### Upload a Local File
+
+```js
+const result = await storage.upload("./document.pdf");
+
+console.log(result);
+```
+
+### Upload Using a Buffer
+
+```js
+const buffer = Buffer.from("Hello from Najumi Storage");
+
+const result = await storage.upload(buffer, {
+  filename: "hello.txt",
+  path: "/documents"
+});
+
+console.log(result);
+```
+
+### Upload Using a Readable Stream
+
+```js
+const fs = require("fs");
+
+const stream = fs.createReadStream("./video.mp4");
+
+const result = await storage.upload(stream, {
+  filename: "video.mp4",
+  path: "/videos"
+});
+
+console.log(result);
+```
+
+### Upload a Multer File
+
+```js
+app.post("/upload", upload.single("file"), async (req, res) => {
+  const result = await storage.upload(req.file, {
+    path: "/uploads"
+  });
+
+  res.json(result);
+});
+```
+
+### Retrieve Bucket Statistics
+
+```js
+const stats = await storage.stats();
+
+console.log(stats);
+```
+
+### List Files
+
+```js
+const files = await storage.files();
+
+console.log(files);
+```
+
+### Download a File
+
+```js
+await storage.download(
+  "ns_xxxxxxxxxxxxx",
+  "./downloads/file.pdf"
+);
+```
+
+### Delete a File
+
+```js
+await storage.delete(
+  "ns_xxxxxxxxxxxxx"
+);
+```
+
+
 ## Authentication
 
 Najumi Storage uses bucket-based authentication to secure all API operations.
@@ -936,6 +1078,66 @@ This allows applications to handle failures gracefully.
 Next Step
 
 After uploading files, you can retrieve and inspect bucket contents.
+
+### New in v1.1.0
+
+The `upload()` method now supports multiple upload sources in addition to local file paths.
+
+#### Upload from a Buffer
+
+```js
+const buffer = Buffer.from("Hello Najumi Storage");
+
+await storage.upload(buffer, {
+  filename: "hello.txt",
+  path: "/documents"
+});
+```
+
+#### Upload from a Readable Stream
+
+```js
+const fs = require("fs");
+
+const stream = fs.createReadStream("./video.mp4");
+
+await storage.upload(stream, {
+  filename: "video.mp4",
+  path: "/videos"
+});
+```
+
+#### Upload a Multer File
+
+```js
+app.post("/upload", upload.single("file"), async (req, res) => {
+  const result = await storage.upload(req.file, {
+    path: "/uploads"
+  });
+
+  res.json(result);
+});
+```
+
+#### Advanced Upload Options
+
+```js
+await storage.upload("./report.pdf", {
+  filename: "annual-report.pdf",
+  path: "/reports/2026",
+  contentType: "application/pdf",
+  timeout: 60000
+});
+```
+
+### Upload Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| path | string | Destination folder inside the bucket |
+| filename | string | Override the uploaded filename |
+| contentType | string | Specify a custom MIME type |
+| timeout | number | Request timeout in milliseconds |
 
 The next section explains how to list files stored inside a bucket.
 
